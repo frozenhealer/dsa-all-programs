@@ -1,0 +1,51 @@
+size=10
+def insert_data(client_list):
+    id=int(input("client id="))
+    name=input("client name=")
+    telephone=input("client phone number")
+    x=id % 10
+    chain= None
+    p=x
+    while(client_list[x]!=None):
+        x=x+1
+    client_list[x]=[id,name,telephone,chain]
+    if(p<x):
+        if(client_list[p][0]%10==client_list[x][0]%10):
+            while(client_list[p][3]!=None):
+                p=client_list[p][3]
+            client_list[p][3]=x
+
+def search_data(client_list,key):
+    x=key%10
+    while(client_list[x]!=None and key!=client_list[x][0] and client_list[x][3]!=None):
+        x=client_list[x][3]
+    if(client_list[x]!=None and key==client_list[x][0]):
+        print("element found")
+    else:
+        print("Element not found")
+
+def delete_data(client_list):
+    key=int(input("Enter the key to be deleted"))
+    x=key%10
+    p=x
+    while(client_list[x]!=None and key!=client_list[x][0] and client_list[x][3]!=None):
+        x=client_list[x][3]
+
+    while(client_list[p][3]!=None):
+        p=client_list[p][3]
+    client_list[p][3]=None
+
+    if(client_list[x][3]!=None):
+        client_list[p][3]=client_list[x][3]
+    client_list[x]=None
+
+def main():
+    client_list=[None]*size
+    insert_data(client_list)
+    insert_data(client_list)
+    insert_data(client_list)
+    key=int(input("enter the key to be searched"))
+    search_data(client_list,key)
+    delete_data(client_list)
+
+main()
