@@ -1,0 +1,51 @@
+size=3
+client_list=[None]*size
+def add_client():
+    client_id=int(input("client id="))
+    name=input("client name=")
+    telephone=input("client phone number=")
+    client_details=[client_id,name,telephone]
+    index=client_id % size
+    for i in range(size):
+        if(client_list[index]==None):
+            client_list[index]=client_details
+            print("adding details",index,client_details)
+            break
+        else:
+            index=(index+1)%size
+
+def search_data():
+    client_id=int(input("client id to be searched="))
+    index=client_id % size
+    for i in range(size):
+        if(client_list[index]!=None):
+            if(client_list[index][0]==client_id):
+                print("element found")
+                break
+            index=index % size
+        else:
+            print("element not found")
+
+def delete_data():
+    client_id=int(input("client id"))
+    index=client_id % size
+    for i in range(size):
+        if(client_list[index]!=None):
+            if(client_list[index][0]==client_id):
+                client_list[index]=None
+                print("element deleted")
+                break
+            index=index % size
+        else:
+            print("element not found")
+
+def main():
+    add_client()
+    add_client()
+    add_client()
+    print("search the element")
+    search_data()
+    print("delete the data")
+    delete_data()
+
+main()
